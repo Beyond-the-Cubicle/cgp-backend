@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model bus_route_information {
+  end_station_first_time       DateTime?                     @db.Time(6)
+  end_station_last_time        DateTime?                     @db.Time(6)
+  maximum_dispatch_interval    Int?
+  minimum_dispatch_interval    Int?
+  operation_count              Int?
+  start_station_first_time     DateTime?                     @db.Time(6)
+  start_station_last_time      DateTime?                     @db.Time(6)
+  start_station_low_first_time DateTime?                     @db.Time(6)
+  start_station_low_last_time  DateTime?                     @db.Time(6)
+  created_at                   DateTime?                     @db.DateTime(6)
+  updated_at                   DateTime?                     @db.DateTime(6)
+  end_station_name             String?                       @db.VarChar(255)
+  route_id                     String                        @id @db.VarChar(255)
+  route_name                   String?                       @db.VarChar(255)
+  start_station_name           String?                       @db.VarChar(255)
+  region                       bus_route_information_region?
+}
+
+enum bus_route_information_region {
+  SEOUL
+  GYEONGGI
+}
